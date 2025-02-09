@@ -77,7 +77,7 @@ cartridges intended for the use in Modern Pentathlon.
 ## Geoff's Requirements
 
 1. Constructed out of the following materials:
-    1. 3D printing
+    1. 3D printing - on a normal printer with print volume of ~250mm cube
     2. ESP32 or other low cost microcontroller (I like the ESP32)
     3. 18650 battery for power
     4. Commonly available laser module (12mm diameter seems pretty common)
@@ -100,6 +100,10 @@ The following modules are proposed:
 3. Functions with commonly available laser-dry-fire phone apps such as laserhit, shootermakeready.
 
 4. Software and CAD files open source, cloneable, editable using common/free software
+
+5. "Normal" target pistol properties such as:
+    1. Adjustable dual stage trigger (that doesn't require reprinting)
+    2. Adjustable sights 
 
 ## Requirement Conflicts
 
