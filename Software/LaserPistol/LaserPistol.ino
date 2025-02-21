@@ -23,7 +23,6 @@ void setup() {
   Serial.println("READY");
 }
 
-
 bool loaded = false;
 
 void loop() {
