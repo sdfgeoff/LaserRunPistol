@@ -32,6 +32,7 @@ void  printState(int state) {
   } else {
     Serial.print("UNKNOWN");
   }
+
 }
 
 
@@ -39,9 +40,11 @@ void setState(int new_state) {
   Serial.print("Changing from state ");
   printState(state);
   Serial.print(" to ");
-  printState(state);
+  printState(new_state);
   Serial.println("");
   state = new_state;
+  // Avoid state trashing (eg by switch bounce)
+  delayMicroseconds(1000);
 }
 
 
@@ -83,7 +86,7 @@ void loop() {
   
   if (state == STATE_SIGHTING) {
     analogWrite(PIN_LASER, 64);
-    if (loading_lever_up) {
+    if (loading_lever_up == true) {
       pinMode(PIN_LASER, OUTPUT);
       digitalWrite(PIN_LASER, LOW);
       setState(STATE_LOADING_LEVER_UP);
@@ -91,19 +94,19 @@ void loop() {
   }
 
   if (state == STATE_NOT_LOADED) {
-    if (loading_lever_up) {
+    if (loading_lever_up == true) {
       setState(STATE_LOADING_LEVER_UP);
     }
   }
 
   if (state == STATE_LOADING_LEVER_UP) {
-    if (!loading_lever_up) {
+    if (loading_lever_up == false) {
       setState(STATE_LOADED);
     }
   }
 
   if (state == STATE_LOADED) {
-    if (trigger_pressed) {
+    if (trigger_pressed == true) {
       Serial.println("FIRING");
       delayMicroseconds(DELAY_FROM_BUTTON_TO_LASER_MICROSECONDS);
       digitalWrite(PIN_LASER, HIGH);
